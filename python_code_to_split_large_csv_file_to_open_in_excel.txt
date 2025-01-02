@@ -1,6 +1,6 @@
 #First paste the csv file in default python directory
 #Replace the csv file name in below code
-#This code will splite large csv data file in 10 Lakhs rows per file (including1 header row)
+#This code will splite large csv data file in 10 Lakhs rows per file (including 1 header row)
 
 import csv
 
