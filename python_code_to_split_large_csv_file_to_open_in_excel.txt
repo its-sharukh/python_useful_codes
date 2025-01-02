@@ -1,11 +1,14 @@
 #First paste the csv file in default python directory
+#This code will splite large csv data file to multiple file which will contain 10 Lakhs rows per file (including 1 header row)
+#Header name or column name will be same in each split file
 #Replace the csv file name in below code
-#This code will splite large csv data file in 10 Lakhs rows per file (including 1 header row)
+
+
 
 import csv
 
 # Define the input file and the desired number of rows per file
-input_file = "mnrl_others_dec.csv"   #replace input file name here
+input_file = "your_csv_data_file.csv"   #replace input file name here
 rows_per_file = 999999
 
 
@@ -20,7 +23,7 @@ with open(input_file, 'r', newline='', encoding='utf-8') as csvfile:
         rows.append(row)  # Add row to the buffer
         # Write to a new file when rows_per_file is reached
         if i % rows_per_file == 0:
-            output_file = f"mnrl_others_dec_part_{part_number}.csv"
+            output_file = f"your_csv_data_file_part_{part_number}.csv"
             with open(output_file, 'w', newline='', encoding='utf-8') as outfile:
                 writer = csv.writer(outfile)
                 writer.writerow(header)  # Write the header
@@ -30,7 +33,7 @@ with open(input_file, 'r', newline='', encoding='utf-8') as csvfile:
 
     # Write any remaining rows to a final file
     if rows:
-        output_file = f"mnrl_others_dec_part_{part_number}.csv"
+        output_file = f"your_csv_data_file_part_{part_number}.csv"
         with open(output_file, 'w', newline='', encoding='utf-8') as outfile:
             writer = csv.writer(outfile)
             writer.writerow(header)  # Write the header
