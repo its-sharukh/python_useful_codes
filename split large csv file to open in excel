@@ -1,0 +1,39 @@
+#First paste the csv file in default python directory
+#Replace the csv file name in below code
+
+
+import csv
+
+# Define the input file and the desired number of rows per file
+input_file = "mnrl_others_dec.csv"   #replace input file name here
+rows_per_file = 999999
+
+
+# Open the input CSV file
+with open(input_file, 'r', newline='', encoding='utf-8') as csvfile:
+    reader = csv.reader(csvfile)
+    header = next(reader)  # Read the header row
+    part_number = 1  # Initialize part number
+    rows = []  # Buffer to hold rows for each part
+
+    for i, row in enumerate(reader, start=1):
+        rows.append(row)  # Add row to the buffer
+        # Write to a new file when rows_per_file is reached
+        if i % rows_per_file == 0:
+            output_file = f"mnrl_others_dec_part_{part_number}.csv"
+            with open(output_file, 'w', newline='', encoding='utf-8') as outfile:
+                writer = csv.writer(outfile)
+                writer.writerow(header)  # Write the header
+                writer.writerows(rows)  # Write the rows
+            rows = []  # Clear the buffer
+            part_number += 1  # Increment the part number
+
+    # Write any remaining rows to a final file
+    if rows:
+        output_file = f"mnrl_others_dec_part_{part_number}.csv"
+        with open(output_file, 'w', newline='', encoding='utf-8') as outfile:
+            writer = csv.writer(outfile)
+            writer.writerow(header)  # Write the header
+            writer.writerows(rows)  # Write the rows
+
+print("File split successfully!")
